@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">{{title}}</a>
+        <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>-->
+        <!--<div class="collapse navbar-collapse" id="navbarCollapse">-->
+        @if(accountService.currentUser()){
+        <ul class="navbar-nav me-auto mb-2 mb-md-0"> <!--*ngIf="loggedIn"-->
+            <li class="nav-item">
+                <a class="nav-link">Matches</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Lists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Messages</a>
+            </li>
+        </ul>
+        }
+
+        @if (accountService.currentUser()) {
+            <!--referensi: ngx-bootstrap. yang penting: dropdown, dropdownToggle, *dropdownMenu-->
+        <div class="dropdown" dropdown>
+            <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome User!</a>
+            <div class="dropdown-menu" *dropdownMenu>
+                <a class="dropdown-item">Edit Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+        </div>
+        }
+
+        @if(!accountService.currentUser()){
+        <!--() event binding, [] property binding
+            two way binding : can receive data from the component, and send data to component from this template-->
+        <form #loginForm="ngForm" (ngSubmit)="login()" class="d-flex" role="button" autocomplete="off">
+            <input name="username" [(ngModel)]="model.username" class="form-control me-2" placeholder="Username">
+            <input name="password" [(ngModel)]="model.password" class="form-control me-2" placeholder="Password"
+                type="password">
+            <button class="btn btn-outline-success" type="submit">Login</button>
+        </form>
+        }
+
+        <!--</div>-->
+    </div>
+</nav>

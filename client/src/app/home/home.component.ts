@@ -9,15 +9,15 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent /*implements OnInit*/{
   
   registerMode = false;
   http = inject(HttpClient);
   users: any;
 
-  ngOnInit(): void {
-    this.getUsers();
-  }
+  // ngOnInit(): void {
+  //   this.getUsers();
+  // }
 
   registerToggle(){
     this.registerMode = !this.registerMode;
